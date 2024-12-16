@@ -2,17 +2,19 @@ import random
 import diceRoll
 import tupleOut
 import fixedDice
+import time
     
 # This programs the process of whether or not the player should be allowed to reroll their turn depending on if they
 # tupled out or rolled a fixed dice
 def player_turn(player, scores):
     print(f"\nPlayer {player + 1}'s turn ==============================================================================================")
+    time.sleep(1)
     roll = diceRoll.dice_roll()
     if_fixed = fixedDice.fixed_dice(roll)
 
     while True:
         print(f"Dice rolled: {roll}")
-
+        time.sleep(1)
         if tupleOut.tuple_out(roll):
             print("You tupled out! Your score for this round is 0 :(")
             return 0
@@ -45,7 +47,16 @@ def game(target_score):
     else:
         winner = 2
     
-    print(f"\nFinal Scores: Player 1 = {scores[0]}, Player 2 = {scores[1]}")
+    print("\nTime for the final scores...")
+    time.sleep(3)
+    print(f"\nPlayer 1 scored...") 
+    time.sleep(3)
+    print(f"{scores[0]}")
+    time.sleep(2)
+    print("\nAnd Player 2 scored...")
+    time.sleep(3)
+    print(f"{scores[1]}")
+    time.sleep(2)
     print(f"Player {winner} wins!")
 
 # Initializing game. First to reach a specific goal (in this case 50) wins the game
