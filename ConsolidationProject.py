@@ -4,6 +4,11 @@ import tupleOut
 import fixedDice
 import time
     
+def show_time(event):
+    current_time = time.localtime()
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
+    print(f"{event} at {timestamp}")
+
 # This programs the process of whether or not the player should be allowed to reroll their turn depending on if they
 # tupled out or rolled a fixed dice
 def player_turn(player, scores):
@@ -41,6 +46,7 @@ def player_turn(player, scores):
 
 # This function keeps track of the players scores while saving past scores and updating them with each roll
 def game(target_score):
+    show_time("The game has begun.")
     scores = [0, 0]
     current_player = 0
 
@@ -66,6 +72,8 @@ def game(target_score):
     print(f"{scores[1]}")
     time.sleep(2)
     print(f"Player {winner} wins!")
+
+    show_time("Game ended.")
 
 # Initializing game. First to reach a specific goal (in this case 50) wins the game
 game(target_score = 50)
