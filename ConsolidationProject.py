@@ -20,7 +20,15 @@ def player_turn(player, scores):
             return 0
         if if_fixed:
             print(f"{[roll[i] for i in if_fixed]}")
-        reroll_chance = input("\nDo you want to reroll? (yes/no): ").strip().lower()
+        while True:
+            try:
+                reroll_chance = input("\nDo you want to reroll? (yes/no): ").strip().lower()
+                if reroll_chance not in {'yes', 'no'}:
+                    raise ValueError("Invalid input. Please type 'yes' or 'no'.")
+                break
+            except ValueError as e:
+                print(e)
+        
         if reroll_chance == 'no':
             total_score = sum(roll)
             print(f"Scored {total_score} points")
