@@ -16,7 +16,9 @@
 - If a player stops voluntarily, their score for the turn is the sum of all three dice.
 - If a player "tuples out," their score for the turn is 0.
 
----
+### Features
+- time.sleep() allows the players to process their decision to reroll and increases readability in the game
+- time.localtime() and time.strftime() allows the player to know how long they have been gaming for so they dont lose track of time
 
 ## Instructions for how to play
 
