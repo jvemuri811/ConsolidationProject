@@ -12,7 +12,6 @@ def show_time(event):
 # This programs the process of whether or not the player should be allowed to reroll their turn depending on if they
 # tupled out or rolled a fixed dice
 def player_turn(player, scores):
-    print(f"\nPlayer {player + 1}'s turn ==============================================================================================")
     time.sleep(1)
     roll = diceRoll.dice_roll()
     if_fixed = fixedDice.fixed_dice(roll)
@@ -46,17 +45,23 @@ def player_turn(player, scores):
 
 # This function keeps track of the players scores while saving past scores and updating them with each roll
 def game(target_score):
-    show_time("The game has begun.")
-    scores = [0, 0]
-    current_player = 0
 
-    while all(score < target_score for score in scores):
-        print(f"\nScores: \nPlayer 1 = {scores[0]}, Player 2 = {scores[1]}")
-        turn_score = player_turn(current_player, scores)
-        scores[current_player] += turn_score
-        current_player = 1 - current_player
+    game_state = {
+        "scores": [0, 0],
+        "current_player": 0
+    }
 
-    if scores[0] >= target_score:
+    show_time("\nThe game has begun")
+
+    while all(score < target_score for score in game_state["scores"]):
+        print(f"\nScores: Player 1 = {game_state['scores'][0]}, Player 2 = {game_state['scores'][1]}")
+        print(f"\nPlayer {game_state['current_player'] + 1}'s turn:")
+        turn_score = player_turn(game_state["current_player"], game_state["scores"])
+
+        game_state["scores"][game_state["current_player"]] += turn_score
+        game_state["current_player"] = 1 - game_state["current_player"]
+
+    if game_state['scores'][0] >= target_score:
         winner = 1
     else:
         winner = 2
@@ -65,15 +70,16 @@ def game(target_score):
     time.sleep(3)
     print(f"\nPlayer 1 scored...") 
     time.sleep(3)
-    print(f"{scores[0]}")
+    print(f"{game_state['scores'][0]}")
     time.sleep(2)
     print("\nAnd Player 2 scored...")
     time.sleep(3)
-    print(f"{scores[1]}")
+    print(f"{game_state['scores'][1]}")
     time.sleep(2)
     print(f"Player {winner} wins!")
+    time.sleep(1)
 
-    show_time("Game ended.")
+    show_time("Game ended")
 
 # Initializing game. First to reach a specific goal (in this case 50) wins the game
 game(target_score = 50)
